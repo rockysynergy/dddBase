@@ -1,0 +1,1 @@
+The PHP library used with Laravel to apply Domain Driven Design.

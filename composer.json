@@ -1,0 +1,12 @@
+{
+    "name": "orq/laravel-dddbase",
+    "description": "The library for laravel to apply Domain Driven Design Pattern",
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orq\\DddBase\\": "src"
+        }
+    }
+}
