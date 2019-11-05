@@ -3,58 +3,29 @@ namespace Orq\DddBase;
 
 class KvMapVo
 {
-    /**
-     * @param string
-     */
-    private $key;
+    private $config;
 
-    /**
-     * @param string
-     */
-    private $value;
+    public function __construct(array $config = [])
+    {
+        if (count($config) < 1) throw new IllegalArgumentException('请提供合法的config', 1572945921);
+        $this->config = $config;
+    }
 
     /**
-     * @param string
+     * @return mixed
      */
-    private $item;
-
-    public function __construct(string $item, $kv)
+    public function getValue(string $key)
     {
-        $this->item = $item;
-        if (is_int($kv)) {
-            $this->key = (string) $kv;
-            $this->value = config("kvconfig.{$item}.{$this->key}");
-        }
-
-        if (is_string($kv) && mb_strlen($kv)>1) {
-            $items = config("kvconfig.{$item}");
-            if (!is_array($items)) {
-                $this->key = $item;
-                $this->value = $items;
-            } else {
-                foreach ($items as $k=>$v) {
-                    if ($v == $kv) {
-                        $this->key = $k;
-                        $this->value = $v;
-                        break;
-                    }
-                }
-            }
-        }
+        if (!isset($this->config[$key])) throw new DomainException('找不到'.$key, 1572945091);
+        return $this->config[$key];
     }
 
-    public function getKey():string
+    /**
+     * @return mixed | false return false when not found
+     */
+    public function getKey(string $value)
     {
-        return $this->key;
+        return array_search($value, $this->config);
     }
 
-    public function getValue():string
-    {
-        return $this->value;
-    }
-
-    public function update(int $key):KvMapVo
-    {
-        return new self($this->item, $key);
-    }
 }
