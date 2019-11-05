@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.2"
     },
+    "license": "mit",
     "autoload": {
         "psr-4": {
             "Orq\\DddBase\\": "src"
