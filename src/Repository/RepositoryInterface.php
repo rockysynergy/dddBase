@@ -5,8 +5,8 @@ use Illuminate\Support\Collection;
 
 interface RepositoryInterface
 {
-    public static function save($entity):void;
-    public static function update($entity):void;
-    public static function findById(int $id);
-    public static function find(array $where):?Collection;
+    public function save($entity):void;
+    public function update($entity):void;
+    public function findById(int $id);
+    public function find(array $where):?Collection;
 }
